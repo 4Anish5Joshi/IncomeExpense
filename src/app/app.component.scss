@@ -1,0 +1,42 @@
+.bottom-nav-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #a6ffb9;
+  }
+  // .main-content {
+  //   padding-bottom: 70px;
+  // }
+  .your-image-class {
+  height: 60px;
+  width:  60px;
+  margin-bottom: 22px;
+}
+
+  a.active {
+    border-bottom: 2px solid #8a1500;
+    padding-bottom: 7px;
+}
+
+  .bottom-nav-item {
+    flex: 1;
+    text-align: center;
+
+  }
+  .selected-icon {
+    background-color: rgb(255, 255, 255);
+    border-radius: 90%;
+
+}
+  .mat-icon{
+    color: rgb(52, 0, 148);
+    font-size: 24px;
+  }
+
+  /* Show the toolbar on screens smaller than 600px */
+  @media screen and (max-width: 600px) {
+    .bottom-nav-bar {
+      display: flex;
+    }
+  }

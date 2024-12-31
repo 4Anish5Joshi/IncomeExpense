@@ -1,0 +1,122 @@
+<app-header></app-header>
+
+<div class="container" style="margin-top: 30px;">
+  <!-- Title -->
+  <div class="row text-center">
+    <h1>Split Expenses</h1>
+    <p>Manage shared expenses and split bills easily!</p>
+  </div>
+
+  <!-- Floating Button -->
+  <button class="btn btn-success btn-floating" (click)="openPopup()">+ Add new Group</button>
+
+  <div *ngIf="groups.length === 0" style="margin-top: 40px;">
+    <h4>No group added till now</h4>
+  </div>
+  <div *ngIf="groups.length > 0">
+    <h2>My Groups</h2>
+  </div>
+
+  <!-- Popup Modal for Group Information -->
+
+  <div class="popup-overlay" *ngIf="isPopupVisible" (click)="closePopup()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+      <!-- Title and Close Button in the Same Row -->
+      <div class="popup-header">
+        <h4>Add New Group</h4>
+        <button (click)="closePopup()" class="btn-close">X</button>
+      </div>
+
+      <!-- Group Name Form Group -->
+      <div class="form-group">
+        <label for="groupName">Group Name:</label>
+        <input
+          id="groupName"
+          type="text"
+          class="form-control"
+          [(ngModel)]="newGroup.name"
+          placeholder="Enter Group Name" />
+      </div>
+
+      <!-- Add Member Form Group -->
+      <div class="form-group">
+        <label for="newMember">Add Member:</label>
+        <div class="d-flex align-items-center">
+          <input
+            id="newMember"
+            type="text"
+            class="form-control"
+            [(ngModel)]="newMemberName"
+            placeholder="Enter member name"
+            (keydown.enter)="addMember()"
+          />
+          <!-- Button to add member -->
+          <button
+            (click)="addMember()"
+            style="margin-left: 10px; cursor: pointer;">
+            Add
+          </button>
+        </div>
+        <!-- Instructional message -->
+        <small class="text-muted" style="margin: 3px; display: block;">
+          Press <strong>Enter</strong> to add a member (or tap the <strong>Add</strong> button on mobile).
+        </small>
+      </div>
+
+      <!-- Display Added Members -->
+      <div *ngIf="newGroup.members.length > 0" class="form-group">
+        <label>Members:</label>
+        <div class="d-flex flex-wrap" style="gap: 10px;">
+          <div class="d-flex align-items-center" style="background-color: #f8f9fa; padding: 0.5rem 0.8rem; border-radius: 20px; border: 1px solid #ced4da; flex: 0 0 auto; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);" *ngFor="let member of newGroup.members">
+            <span style="flex-basis: 80%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-right: 10px;">
+              {{ member }}
+            </span>
+            <button class="btn btn-sm btn-danger" style="flex-basis: 20%; width: 24px; height: 24px; line-height: 20px; text-align: center; border-radius: 50%; padding: 0;" (click)="removeMember(member)">
+              &times;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="btn btn-success" (click)="addGroup()" style="margin-right: 10px; color: rgb(0, 214, 0);">Add Group</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Display Groups as Cards (Full Width) -->
+  <div *ngIf="groups.length > 0" class="row mt-4">
+
+    <div class="col-lg-6" *ngFor="let group of groups">
+      <!-- Group Header -->
+      <div class="card shadow" (click)="viewGroupDetails(group)" style="cursor: pointer;">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Circle before the group name -->
+            <div class="gradient-circle"></div>
+            <h2 class="card-title m-0" style="margin-left: 20px;">{{ group.name }}</h2>
+            <div class="members-list">
+              <h4>
+                <span *ngFor="let member of group.members; let last = last">
+                  {{ member }}<span *ngIf="!last">, </span>
+                </span>
+              </h4>
+            </div>
+            <button
+              class="btn btn-danger ms-2"
+              (click)="deleteGroup(group.name)"
+              style="font-size: 15px;"
+            >
+              <i class="fas fa-trash-alt" style="color: rgb(255, 255, 255); font-size: 16px; cursor: pointer;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>

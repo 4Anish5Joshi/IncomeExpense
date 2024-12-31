@@ -1,0 +1,54 @@
+<div id="nav-head" class="header-nav">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-md-3 no-padding col-sm-12 nav-img">
+        <img src="assets/exp.png" alt="logo" routerLink="/home" style="cursor: pointer;" />
+      </div>
+      <div id="menu" class="col-lg-8 col-md-9 d-none d-md-block nav-item">
+        <ul>
+          <li><a class="navi" routerLinkActive="active" routerLink="/home">Home</a></li>
+          <li>
+            <ng-container *ngIf="isUserLoggedIn; else guestContent">
+              <a class="navi" routerLinkActive="active" routerLink="/analytics">Analytics</a>
+            </ng-container>
+            <ng-template #guestContent>
+              <span class="locked-analytics">
+                <i class="fas fa-lock" title="Please login to access this feature"></i>
+                <span title="Please login to access this feature">Analytics (Locked)</span>
+              </span>
+            </ng-template>
+          </li>
+          <li><a class="navi" routerLinkActive="active" routerLink="/split">Splitwise</a></li>
+          <!-- Notification Icon -->
+          <!-- <li *ngIf="isUserLoggedIn" class="notification-icon">
+            <a class="navi" (click)="openNotifications()">
+              <i class="fas fa-bell" style="font-size: 20px;" title="Notifications"></i>
+            </a>
+          </li> -->
+          <li class="dropdown guest-info">
+            <ng-container *ngIf="isUserLoggedIn; else guestUser">
+              <a (click)="toggleDropdown()" class="navi dropdown-toggle" aria-haspopup="true" aria-expanded="dropdownOpen">
+                <i class="fas fa-user" style="font-size: 20px;"></i>
+              </a>
+              <div *ngIf="dropdownOpen" class="dropdown-menu">
+                <a class="dropdown-item" routerLink="/settings">Settings</a>
+                <a class="dropdown-item" (click)="logout()">Logout</a>
+              </div>
+            </ng-container>
+            <ng-template #guestUser>
+              <span>Hello, Guest User</span>
+              <button class="btn btn-primary login-btn" routerLink="/login">Login</button>
+            </ng-template>
+          </li>
+          <li style="margin-left: 50px;">
+            <div class="theme-toggle">
+              <label (click)="toggleTheme()" style="cursor: pointer;">
+                <i class="fas" style="font-size: 20px;" [ngClass]="isDarkTheme ? 'fa-moon' : 'fa-sun'"></i>
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

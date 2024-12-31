@@ -1,0 +1,216 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navi {
+  font-size: 120%;
+  font-weight: 500;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+}
+
+.header-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  background-color: #a6c2ff;
+  padding: 10px 20px; /* Adds padding to the header */
+}
+
+.header-nav .nav-img {
+  padding: 0;
+}
+
+.header-nav .nav-img img {
+  width: 65px; /* Adjust as needed */
+  height: 65px; /* Adjust as needed */
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.header-nav .nav-item ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between; /* Ensure even spacing between items */
+  align-items: center; /* Align items horizontally */
+}
+
+.header-nav .nav-item ul li {
+  margin: 0 15px; /* Adjust spacing between menu items */
+}
+
+.header-nav .nav-item ul li a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px; /* Adds padding around the text */
+}
+
+.header-nav .nav-item ul li a:hover {
+  color: #1201ff;
+}
+
+.header-nav .nav-item ul li a.active {
+  border-bottom: 3px solid #1400c9;
+  padding-bottom: 7px;
+}
+
+/* Styling for the locked analytics link */
+.locked-analytics {
+  display: inline-flex; /* Keep lock icon and text in the same line */
+  align-items: center;
+  white-space: nowrap; /* Prevents text from wrapping */
+  color: gray;
+}
+
+.locked-analytics i {
+  margin-right: 5px; /* Spacing between icon and text */
+}
+
+/* Styling for the guest info and login button */
+.guest-info {
+  display: flex;
+  align-items: center;
+  white-space: nowrap; /* Keep guest info and button in the same line */
+}
+
+.guest-info span {
+  margin-right: 15px;
+  font-weight: 500;
+  color: darkblue;
+}
+
+.login-btn {
+  background-color: darkblue;
+  color: white;
+}
+
+.header-nav .theme-toggle {
+  display: flex;
+  align-items: center;
+
+  label {
+    cursor: pointer;
+    font-size: 20px;
+  }
+}
+
+.header-nav .appoint {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-nav .appoint .btn {
+  color: #fff;
+}
+
+.header-nav .appoint .btn:hover {
+  color: #fff;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-menu {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: block;
+    min-width: 160px;
+    padding: 8px 0;
+    border-radius: 4px;
+
+    .dropdown-item {
+      padding: 8px 16px;
+      color: #333;
+      text-decoration: none;
+      display: block;
+
+      &:hover {
+        background-color: #f1f1f1;
+      }
+    }
+  }
+}
+
+.locked {
+  color: gray;
+  cursor: not-allowed;
+}
+
+.swal-popup {
+  display: flex;
+  flex-direction: column; /* Aligns children vertically */
+  align-items: center;    /* Centers children horizontally */
+}
+/* Responsive styling */
+// @media (max-width: 768px) {
+//   .header-nav .nav-item ul {
+//     flex-direction: row; /* Stack menu items */
+//     align-items: center;
+//     // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+//     background-color:#a6c2ff;
+//   }
+
+//   .header-nav .nav-item ul li {
+//     margin: 10px 0; /* Vertical margin for better spacing */
+//   }
+
+//   .header-nav .nav-img img {
+//     margin-bottom: 10px; /* Add some space between the logo and menu on small screens */
+//   }
+// }
+
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .header-nav .nav-item ul {
+    flex-direction: row; /* Stack menu items horizontally */
+    justify-content: center; /* Center items in mobile view */
+    margin-bottom: 10px; /* Space below menu items */
+    padding-left: 0; /* Reset padding for mobile */
+    padding-right: 0; /* Reset padding for mobile */
+    width: auto; /* Allow width adjustment */
+    flex-wrap: wrap; /* Allow wrapping of items if necessary */
+    text-align: center; /* Center text for better readability */
+  }
+
+  .header-nav .nav-item ul li {
+    margin: 0 10px; /* Adjust spacing between menu items */
+    font-size: smaller; /* Smaller font size for mobile */
+    text-align: center; /* Center align text in list items */
+    flex-grow: 1; /* Allow items to grow equally */
+    min-width: fit-content; /* Prevent items from stretching too much */
+  }
+
+  .guest-info {
+    margin-top: 10px; /* Space above guest info */
+    justify-content: center; /* Center align guest info and login button */
+    flex-direction: column; /* Stack vertically on small screens */
+    align-items: center; /* Center align items horizontally */
+    text-align: center; /* Center align text for better readability */
+  }
+
+  .theme-toggle {
+    margin-top: 10px; /* Space above theme toggle */
+    justify-content: center; /* Center align theme toggle button */
+    text-align: center; /* Center align text for better readability */
+
+    label {
+      cursor: pointer;
+      font-size: larger; /* Increase size for better touch target on mobile */
+    }
+
+    i {
+      font-size: larger; /* Increase icon size on mobile for visibility */
+    }
+  }
+}

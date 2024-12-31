@@ -1,0 +1,295 @@
+// .container {
+//   margin-top: 25px;
+// }
+.highlight {
+  background-color: rgba(255, 255, 0, 0.3); // Light yellow color
+  transition: background-color 0.3s ease;
+}
+.blinking {
+  animation: blink-animation 0.5s steps(5, start) infinite; /* Adjust timing as needed */
+}
+
+@keyframes blink-animation {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: none; /* No shadow at the mid-point of the animation */
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.year-nav,
+.month-filter {
+  margin-right: 1rem; /* Add some spacing between sections */
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 7px;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+}
+
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(44, 44, 44, 0.25) !important;
+}
+
+.add {
+  width: 20%;
+}
+
+.arrow {
+  background-color: rgb(199, 213, 255);
+  border: 1px solid black;
+}
+
+.del, .edit {
+  width: 100%;
+}
+
+.add {
+  margin-left: 0px;
+  background-color: darkblue;
+  color: white;
+}
+
+.bal {
+  margin-left: 20px;
+  margin-right: 15px;
+}
+
+.amt {
+  margin: 0 10px 0 10px;
+}
+
+.table-bordered {
+  border: 1px solid #bababa;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #464646;
+}
+
+.header-nav {
+  background-color: #ff8686;
+}
+
+.income-field {
+  background-color: rgb(0, 117, 0);
+  color: white;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.save-field {
+  background-color: rgb(90, 90, 90);
+  color: white;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.expense-field {
+  background-color: rgb(128, 0, 0);
+  color: white;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.h {
+  margin-left: 8px;
+}
+
+.cat {
+  margin-bottom: 11px;
+}
+
+.fy {
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 14px;
+}
+
+::ng-deep .category-popup {
+  width: 90%; /* Increase width */
+  max-width: 800px; /* Set a maximum width */
+  height: auto; /* Allow height to adjust based on content */
+  max-height: 600px; /* Set a maximum height */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+
+::ng-deep .category-item {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100px; /* Fixed width for items */
+  text-align: center; /* Center text */
+}
+
+::ng-deep .category-item.selected {
+  background-color: #e1f0ff; /* Light blue background for selected item */
+}
+
+.card {
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  height: auto; /* Allow height to adjust based on content */
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%; /* Ensure the card body fills the entire card height */
+  padding: 0.5rem; /* Reduce the padding for a more compact look */
+}
+
+.transaction-details {
+  flex: 1;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-text {
+  cursor: pointer;
+  margin: 0 10px;
+  color: rgb(51, 48, 255); /* Change the color as needed */
+  font-weight: bold; /* Make the text bold */
+}
+
+.pagination-text.disabled {
+  color: gray; /* Change color for disabled state */
+  cursor: not-allowed; /* Change cursor for disabled state */
+}
+
+.pagination-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 10px;
+  display: flex;
+}
+
+.pagination-list li {
+  margin: 0 5px;
+}
+
+.page-button {
+  border: none;
+  color: black;
+  border-radius: 50%; /* Makes the button circular */
+  width: 30px; /* Set width */
+  height: 30px; /* Set height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.page-button:hover {
+  background-color: #c6e2ff; /* Darker shade on hover */
+}
+
+.page-button.active {
+  background-color: darkblue; /* Active page color */
+  font-weight: bold;
+  color: white; /* Bold text for the active page */
+}
+
+@media (max-width: 768px) {
+  // .row {
+  //   flex-direction: column;
+  // }
+
+  .add, .update {
+    width: 100%;
+  }
+
+  // .bal, .exp {
+  //   margin: 0;
+  // }
+
+
+
+  .form-group {
+    width: 100%; /* Full width for form groups */
+    margin-bottom: 1rem; /* Space between form groups */
+  }
+
+  .card-body {
+    padding: 1rem; /* Adjust padding for smaller screens */
+  }
+  // .text-left{
+  //   margin-top: 12px
+  // }
+  .text-right{
+    text-align: left;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 7px;
+  }
+
+  /* Year Navigation and Month Filter */
+  .year-nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Full-width row */
+    margin-bottom: 1rem;
+    margin-left: 0px;
+
+    .arrow {
+      flex: 0 0 auto; /* Ensure arrows don't stretch */
+    }
+
+    .fy {
+      flex: 1; /* Make the year filter take up available space */
+      text-align: center; /* Center align the year */
+    }
+
+    ng-select {
+      flex: 1; /* Ensure ng-select adjusts width properly */
+      text-align: right; /* Align on the right side */
+    }
+  }
+
+  /* Export and Upload Buttons */
+  .export-upload-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Full-width row */
+
+    .locked-analytics {
+      flex: 1; /* Ensure each button takes equal space */
+      margin: 0 5px; /* Add spacing between buttons */
+      text-align: center; /* Center align text and icons */
+    }
+
+    // .btn {
+    //   padding: 0.5rem 1rem; /* Add padding for better touch targets */
+    // }
+  }
+}
+

@@ -1,0 +1,89 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+</head>
+<body>
+<div class="container" id="container" #container>
+
+  <div class="form-container sign-up">
+    <form>
+      <h1 style="color: darkblue; font-weight: 400;">Income Expense Tracker</h1>
+      <h2>Create Account</h2>
+      <div class="social-icons">
+        <a><i class="fab fa-google" aria-hidden="true"></i></a>
+        <a><i class="fab fa-facebook-f"></i></a>
+        <a><i class="fab fa-github"></i></a>
+        <a><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <span>or use your email for registration</span>
+      <input type="text" placeholder="Name" autocomplete="off">
+      <input type="email" placeholder="Email" autocomplete="off">
+      <input type="text" placeholder="Phone Number" autocomplete="off">
+      <button>Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in">
+    <!-- Form to send OTP -->
+    <form (ngSubmit)="sendOTP()" *ngIf="!otpSent">
+      <h1 style="color: darkblue; font-weight: 400;">Income Expense Tracker</h1>
+      <h2>Sign In with OTP</h2>
+      <input
+        type="text"
+        placeholder="Phone Number"
+        [(ngModel)]="phoneNumber"
+        name="phoneNumber"
+        maxlength="10"
+        autocomplete="off"
+        required>
+      <button type="submit">Send OTP</button>
+
+      <div style="margin-top: 50px; text-align: center;" >
+      <h2>Want to be Guest User?</h2>
+      <p style="font-size: 12px; color: darkblue; font-weight: 600">You won't be shown all the site features</p>
+      <button (click)="guestLogin()">Guest Login</button>
+      </div>
+    </form>
+
+
+    <!-- Form to verify OTP -->
+    <form (ngSubmit)="verifyOTP()" *ngIf="otpSent">
+      <h1 class="otp-header">
+          <i class="fas fa-arrow-left" (click)="goBackToSignIn()" style="margin-right: 80px; cursor: pointer; font-size: 24px; color: darkblue;"></i>
+          <span style="margin-right: 80px;">Enter OTP</span>
+      </h1>
+      <input
+        type="text"
+        placeholder="Enter OTP"
+        [(ngModel)]="enteredOTP"
+        name="otp"
+        maxlength="6"
+        autocomplete="off"
+        required>
+      <button type="submit">Verify OTP</button>
+    </form>
+  </div>
+  <div class="toggle-container">
+    <div class="toggle">
+      <div class="toggle-panel toggle-left">
+          <img src="assets/exp.png" alt="" width="150" height="150">
+        <h1>Welcome Back!</h1>
+        <p>Enter your personal details to use all of site features</p>
+        <button id="login" #login>Login In</button>
+      </div>
+      <div class="toggle-panel toggle-right">
+        <img src="assets/exp.png" alt="" width="150" height="150">
+        <h1>Hello, User!</h1>
+        <p>Register with mobile otp to use all of site features</p>
+        <button id="register" #register>Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Toaster Notification -->
+<div class="toaster-container" *ngIf="showToaster" [ngClass]="toasterType">
+  <div class="toaster" [ngClass]="toasterType">
+    <p>{{ toasterMessage }}</p>
+  </div>
+</div>
+</body>

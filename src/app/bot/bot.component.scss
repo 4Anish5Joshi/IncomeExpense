@@ -1,0 +1,65 @@
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.bot-container {
+  position: fixed; /* Fixed position to stick to bottom right */
+  bottom: 20px; /* Distance from the bottom */
+  right: 20px; /* Distance from the right */
+  cursor: pointer; /* Change cursor on hover */
+  z-index: 1000; /* Ensure it stays on top of other content */
+
+  .bot-icon {
+    width: 120px; /* Adjust the size as needed */
+    height: 120px; /* Adjust the size as needed */
+    animation: shake 0.5s ease-in-out infinite; /* Add shake animation */
+    animation-play-state: paused; /* Initially pause the animation */
+  }
+
+
+  .coming-soon-overlay {
+    position: fixed; /* Cover the entire viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 999; /* Ensure it is above other content */
+  }
+
+  .coming-soon-message {
+    background-color: #fff; /* Background for the message */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    padding: 20px; /* Increased padding for the message */
+    text-align: center; /* Center align text */
+    animation: fadeIn 0.5s forwards; /* Animation for the message */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start fully transparent */
+    transform: translateY(10px); /* Start slightly lower */
+  }
+  to {
+    opacity: 1; /* End fully visible */
+    transform: translateY(0); /* End at normal position */
+  }
+}
+
+.coming-soon {
+  font-size: 1.5rem; /* Adjust size as needed */
+  color: #333; /* Change text color as desired */
+}
+
+.rounded-image {
+  border-radius: 20px; /* Adjust as needed */
+}

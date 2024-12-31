@@ -1,0 +1,232 @@
+/* Base tab style */
+/* Base tab style */
+.nav-tabs {
+  display: flex;
+  justify-content: space-between;  /* This will space the tabs evenly */
+  background-color: #f8f9fa;
+  border-radius: 30px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);  /* Slightly stronger shadow */
+  transition: all 0.3s ease-in-out;  /* Smooth transition for tab container */
+  width: 60%;  /* Set the width to 50% of the parent container */
+  margin: 0 auto;  /* Center the tab container horizontally */
+}
+.nav-tabs .nav-item {
+  flex: 1;  /* This ensures that each tab takes equal space */
+}
+
+.nav-tabs .nav-link {
+  // color: #6c757d;
+  // font-size: 16px;
+  // font-weight: 500;
+  // padding: 14px 24px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  // text-transform: uppercase;
+  background-color: transparent;
+  // border: 2px solid transparent;
+  // box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);  /* Soft shadow for inactive tabs */
+  cursor: pointer;
+  text-align: center;  /* Center the text inside each tab */
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #e9ecef;
+  color: #007bff;
+  transform: translateY(-4px);  /* Slight lift on hover */
+  border-color: #007bff;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);  /* Stronger shadow on hover */
+}
+
+.nav-tabs .nav-link.active-tab {
+  color: #fff;
+  background-color: #61adff;
+  border: 2px solid #61adff;
+  border-radius: 25px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);  /* Elevated shadow for active tab */
+  transform: translateY(-6px);  /* More pronounced lift */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Active tab hover effect */
+.nav-tabs .nav-link.active-tab:hover {
+  background-color: #4a9cc3;
+  transform: translateY(-8px);  /* Larger lift for active tab on hover */
+}
+
+/* Tab Container Hover Effect */
+.nav-tabs:hover {
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);  /* Stronger shadow when hovering over the entire tab container */
+}
+
+
+/* Highlighted card with shadow */
+.highlight-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  padding: 1.5rem;
+  margin: 1rem;
+  cursor: pointer;
+  border: 1px solid #f1f1f1;
+}
+
+.highlight-card:hover {
+  transform: translateY(-10px); /* Strong upward movement */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  background-color: #f8f9fa;
+}
+
+/* Add smooth transition when the card is hovered */
+.card-body {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Chart container */
+#balanceChart {
+  width: 100% !important;
+  height: 200px !important; /* Adjust height for better chart rendering */
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* Group details container */
+.group-details {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-top: 20px;
+
+  .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 13px;
+    a {
+      color: #007bff;
+      font-weight: 600;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    span {
+      color: #6c757d;
+    }
+  }
+
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .text-primary {
+    color: #007bff;
+  }
+
+  .members-section,
+  .expenses-section,
+  .balances-section {
+    margin-top: 30px;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 12px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+
+        button {
+          margin-left: 10px;
+          padding: 8px 15px;
+          background-color: #61adff;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          font-size: 13px;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: #4c8dd4;
+          }
+        }
+      }
+    }
+
+    .add-member,
+    .add-expense {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      input, select {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 13px;
+        margin-right: 10px;
+        width: 100%;
+      }
+
+      button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }
+}
+
+/* Responsive design adjustments */
+@media screen and (max-width: 780px) {
+  .group-details {
+    padding: 15px;
+  }
+
+  .highlight-card {
+    margin: 10px 0;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .members-section, .expenses-section, .balances-section {
+    ul {
+      li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .add-member,
+    .add-expense {
+      flex-direction: column;
+      button {
+        width: 100%;
+      }
+    }
+  }
+  .nav-tabs {
+    width: 100%;
+  }
+}

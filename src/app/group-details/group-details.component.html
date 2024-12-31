@@ -1,0 +1,234 @@
+<app-header></app-header>
+
+<div class="container" *ngIf="group" style="margin-top: 20px;">
+  <!-- Group Header -->
+  <div class="card shadow-lg mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Back Button -->
+        <button class="btn btn-outline-secondary" (click)="goBack()">
+          <i class="fas fa-arrow-left me-2"></i>
+        </button>
+        <h2 class="mb-0 text-primary" style="margin-top: 5px;">{{ group.name }}</h2>
+        <div class="members-list">
+          <h5 class="mb-0 text-muted">
+            Members:
+            <span *ngFor="let member of group.members; let last = last">
+              {{ member }}<span *ngIf="!last">, </span>
+            </span>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-4" id="groupTabs" style="margin-bottom: 30px;">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [ngClass]="{'active-tab': selectedTab === 'expenses'}"
+        (click)="selectTab('expenses')"
+      >
+        Expenses
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [ngClass]="{'active-tab': selectedTab === 'insights'}"
+        (click)="selectTab('insights')"
+      >
+        Insights
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [ngClass]="{'active-tab': selectedTab === 'balances'}"
+        (click)="selectTab('balances')"
+      >
+        Balances
+      </a>
+    </li>
+  </ul>
+
+
+  <!-- Tabs Content -->
+  <div *ngIf="selectedTab === 'expenses'">
+    <!-- Add an Expense Form -->
+    <div class="card shadow-lg mb-4">
+      <div class="card-body">
+        <h4 class="text-primary">Add an Expense</h4>
+        <div class="row mt-3">
+          <!-- Expense Description -->
+          <div class="form-group col-lg-4 col-md-6">
+            <label for="expenseDescription">Expense Description:</label>
+            <input
+              id="expenseDescription"
+              class="form-control"
+              placeholder="e.g., Dinner at restaurant"
+              [(ngModel)]="expense.description"
+            />
+          </div>
+          <!-- Total Amount -->
+          <div class="form-group col-lg-2 col-md-6">
+            <label for="expenseAmount">Amount:</label>
+            <input
+              id="expenseAmount"
+              type="number"
+              class="form-control"
+              placeholder="Enter Amount"
+              [(ngModel)]="expense.amount"
+            />
+          </div>
+          <!-- Payer -->
+          <div class="form-group col-lg-3 col-md-6">
+            <label for="payer">Paid By:</label>
+            <ng-select
+              [items]="group.members"
+              [(ngModel)]="expense.payer"
+              placeholder="Paid by whom"
+              [clearable]="true"
+            >
+            </ng-select>
+          </div>
+          <!-- Split With -->
+          <div class="form-group col-lg-3 col-md-6">
+            <label for="participants">Split With:</label>
+            <ng-select
+              [items]="group.members"
+              [(ngModel)]="expense.participants"
+              placeholder="Select Participants"
+              [multiple]="true"
+            >
+            </ng-select>
+            <div class="form-check mt-2">
+              <input
+                type="checkbox"
+                id="selectAll"
+                class="form-check-input"
+                (change)="toggleSelectAll($event)"
+                [checked]="isAllSelected()"
+              />
+              <label for="selectAll" class="form-check-label">Select All</label>
+            </div>
+          </div>
+          <!-- Add Expense Button -->
+          <div class="col-12 text-center mt-3">
+            <button class="btn btn-success px-4" (click)="addExpense()">Add Expense</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expense Summary -->
+    <div class="card shadow-lg mb-4">
+      <div class="card-body">
+        <h4 class="text-primary">Expense Summary</h4>
+        <div *ngIf="group.expenses.length === 0" class="text-center mt-3">
+          <p>No expenses added yet!</p>
+        </div>
+        <div *ngIf="group.expenses.length > 0">
+          <table class="table table-bordered table-striped mt-3">
+            <thead>
+              <tr class="table-primary">
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Paid By</th>
+                <th>Split With</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let expense of group.expenses; let i = index">
+                <td>{{ expense.description }}</td>
+                <td>₹{{ expense.amount }}</td>
+                <td>{{ expense.payer }}</td>
+                <td>
+                  <span *ngFor="let participant of expense.participants; let last = last">
+                    {{ participant }}<span *ngIf="!last">, </span>
+                  </span>
+                </td>
+                <td>
+                  <button class="btn btn-danger btn-sm" (click)="removeExpense(i)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div *ngIf="selectedTab === 'insights'"> -->
+    <!-- Insights Section -->
+    <!-- <div class="card shadow-lg mb-4">
+      <div class="card-body">
+        <h4 class="text-primary">Insights</h4>
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <h5 class="text-center">Who Paid How Much</h5>
+            <canvas id="payerChart"></canvas>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <h5 class="text-center">Contribution by Members</h5>
+            <canvas id="contributionChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  <!-- </div> -->
+
+  <div *ngIf="selectedTab === 'insights'">
+    <!-- Insights Section -->
+
+    <div class=" container card shadow-lg mb-4">
+      <div class="card-body">
+        <h3 class="text-primary">Insights</h3>
+        <!-- Card for Balance Chart with highlight and box shadow -->
+         <div class="card mt-4 border-primary shadow-lg rounded-lg highlight-card">
+          <!-- <div class="card-body"> -->
+            <h3 class="text-center">Balance Overview</h3>
+            <!-- <canvas id="balanceChart"></canvas> -->
+            <div #networkContainer style="height: 500px;"></div>
+
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+  </div>
+
+  <div *ngIf="selectedTab === 'balances'">
+    <!-- Balance Details -->
+    <div class="card shadow-lg mb-4">
+      <div class="card-body">
+        <h4 class="text-primary">Balances</h4>
+        <div *ngIf="getBalanceKeys().length === 0" class="text-center mt-3">
+          <p>All balances are settled!</p>
+        </div>
+        <ul class="list-group" *ngIf="getBalanceKeys().length > 0">
+          <li class="list-group-item" *ngFor="let key of getBalanceKeys()">
+            <span *ngIf="balances[key] > 0">
+              {{ key }} owes ₹{{ balances[key] | number:'1.2-2' }}
+            </span>
+            <span *ngIf="balances[key] < 0">
+              {{ key }} is owed ₹{{ -balances[key] | number:'1.2-2' }}
+            </span>
+          </li>
+        </ul>
+        <div class="text-center mt-3">
+          <button class="btn btn-primary" (click)="settleUp()">Settle Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center mt-5" *ngIf="!group">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>

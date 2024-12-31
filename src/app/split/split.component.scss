@@ -1,0 +1,172 @@
+.coming-soon {
+  font-size: 2.5rem; /* Adjust size as needed */
+  color: #333; /* Change text color as desired */
+  opacity: 0; /* Initial opacity for fade-in effect */
+  transform: scale(0.5); /* Initial scale for the animation */
+  animation: fadeInScale 1s forwards; /* Animation name and duration */
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0; /* Start completely transparent */
+    transform: scale(0.5); /* Start smaller */
+  }
+  100% {
+    opacity: 1; /* End fully opaque */
+    transform: scale(1); /* End at normal size */
+  }
+}
+
+.gradient-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #8c0096, #3f38ff, #00ff3c);
+  background-size: 300% 300%;
+  animation: gradientAnimation 3s ease infinite;
+  margin-right: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 24px;
+}
+
+/* Floating button */
+.btn-floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  // border-radius: 50%;
+  font-size: 20px;
+  z-index: 9999;
+}
+
+/* Popup modal */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+}
+
+/* Increased popup size */
+.popup-content {
+  background-color: white;
+  padding: 30px; /* Increased padding for a larger interior space */
+  border-radius: 8px;
+  width: 500px; /* Increased width for a larger popup */
+  max-width: 100%; /* Prevents overflow on smaller screens */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* Ensure title and close button are on the same row */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Title and Close button styling in the same row */
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.popup-content h4 {
+  margin: 0; /* Remove any default margin on the title */
+}
+
+.popup-content button {
+  font-size: 1.5rem;
+  color: #000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Card with shadow */
+/* Card with shadow and full-width */
+.card {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7); /* Add box shadow */
+  margin-bottom: 20px; /* Add some spacing between cards */
+  border-radius: 8px; /* Rounded corners for the card */
+  width: 100%; /* Ensure the card takes full width */
+}
+
+/* Other styling remains unchanged */
+
+
+/* Flexbox layout for Group Name, Members, and Manage Button */
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body {
+  padding: 15px; /* Padding inside the card */
+}
+
+.card-title {
+  margin: 0; /* Remove default margin to align with other elements */
+  font-size: 18px; /* Adjust font size for group name */
+  flex-basis: 25%; /* Ensure the title takes less space */
+}
+.members-list {
+  flex: 1;
+  overflow-wrap: break-word; /* Break words if they exceed container width */
+  white-space: normal; /* Allow text to wrap to the next line */
+  word-wrap: break-word; /* Compatibility with older browsers */
+  margin-left: 20px; /* Add spacing between the group name and members */
+}
+
+.card-title {
+  flex-shrink: 0; /* Prevent the title from shrinking */
+}
+
+button.btn-primary {
+  font-size: 1rem;
+  padding: 5px 10px; /* Adjust button padding */
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button.btn-primary:hover {
+  background-color: #0056b3;
+}
+

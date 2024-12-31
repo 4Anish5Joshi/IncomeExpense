@@ -1,0 +1,14 @@
+<h2  mat-dialog-title>
+  Expected Annual Saving
+  <div mat-icon class="close-icon" (click)="dialogRef.close()">close</div>
+</h2>
+<div  mat-dialog-content>
+  <div mat-form-field appearance="fill">
+    <!-- <div mat-label>Enter your expected annual saving</div> -->
+    <input appInputRestrict="number" [(ngModel)]="data.expectedAnnualSaving" placeholder="Enter Amount">
+  </div>
+</div>
+<div  mat-dialog-actions>
+  <button class="btn btn-success" mat-button (click)="save()">Save</button>
+  <button class="btn btn-danger cen" mat-button (click)="dialogRef.close()">Close</button>
+</div>

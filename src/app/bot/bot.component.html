@@ -1,0 +1,10 @@
+<div class="bot-container" (click)="toggleMessage()">
+  <img src="assets/bot.png" alt="Bot" class="bot-icon" />
+  <div *ngIf="showMessage" class="coming-soon-overlay">
+    <div class="arrow"></div> <!-- Arrow element added here -->
+    <div class="coming-soon-message">
+      <h1 class="coming-soon">Coming Soon..</h1>
+      <!-- <img src="assets/ud.png" alt="" width="400" height="400" class="rounded-image"> -->
+    </div>
+  </div>
+</div>
