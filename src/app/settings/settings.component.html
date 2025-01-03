@@ -1,0 +1,102 @@
+<div class="settings container" style="margin-top: 50px;">
+  <div class="row" style="margin-bottom: 40px;">
+    <div class="col-lg-2">
+      <img src="assets/exp.png" alt="Logo" class="me-3 text-center" style="height: 50px;" />
+    </div>
+    <div class="col-lg-10">
+      <h1 class="text-primary mb-0 text-center">Income Expense Tracker</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-10">
+      <h2 class="text-primary"> <button class="btn btn-secondary" (click)="goBack()"><i class="fas fa-arrow-left me-2"></i> </button> Settings</h2>
+    </div>
+    <!-- Sidebar for navigation -->
+    <div class="col-lg-3 col-md-4">
+      <ul class="list-group">
+        <li class="list-group-item" (click)="selectTab('theme')">Theme & Appearance</li>
+        <li class="list-group-item" (click)="selectTab('profile')">Profile</li>
+        <li class="list-group-item" (click)="selectTab('debts')">Simplify Debts</li>
+        <li class="list-group-item" (click)="selectTab('rounding')">Rounding Off</li>
+        <li class="list-group-item" (click)="selectTab('data')">Clear Data</li>
+        <li class="list-group-item" (click)="selectTab('faq')">FAQ</li>
+        <li class="list-group-item" (click)="selectTab('logout')">Logout from All Devices</li>
+      </ul>
+    </div>
+    <!-- Content Area -->
+    <div class="col-lg-9 col-md-8">
+      <!-- Theme & Appearance -->
+      <div *ngIf="selectedTab === 'theme'">
+        <h4>Theme & Appearance</h4>
+        <label>
+          <input type="checkbox" [(ngModel)]="darkMode" (change)="toggleTheme()" />
+          Dark Mode
+        </label>
+      </div>
+
+      <!-- Profile -->
+      <div *ngIf="selectedTab === 'profile'">
+        <h4>Profile</h4>
+        <form>
+          <div class="mb-3">
+            <label for="username" class="form-label">Name</label>
+            <input type="text" id="username" class="form-control" [(ngModel)]="user.name" />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">New Password</label>
+            <input type="password" id="password" class="form-control" [(ngModel)]="user.password" />
+          </div>
+          <button type="button" class="btn btn-primary" (click)="updateProfile()">Update Profile</button>
+        </form>
+      </div>
+
+      <!-- Simplify Debts -->
+      <div *ngIf="selectedTab === 'debts'">
+        <h4>Simplify Debts</h4>
+        <label>
+          <input type="checkbox" [(ngModel)]="simplifyDebts" />
+          Enable Simplify Debts
+        </label>
+      </div>
+
+      <!-- Rounding Off -->
+      <div *ngIf="selectedTab === 'rounding'">
+        <h4>Rounding Off</h4>
+        <label>
+          <input type="checkbox" [(ngModel)]="roundingOff" />
+          Enable Rounding Off for Expenses
+        </label>
+      </div>
+
+      <!-- Clear Data -->
+      <div *ngIf="selectedTab === 'data'">
+        <h4>Clear Data</h4>
+        <button class="btn btn-danger" (click)="clearData()">Clear All Data</button>
+      </div>
+
+      <!-- FAQ -->
+      <div *ngIf="selectedTab === 'faq'">
+        <h2 class="text-primary text-center mb-4">Frequently Asked Questions</h2>
+        <div class="faq">
+          <div class="faq-item" *ngFor="let item of faqs; let i = index">
+            <div class="faq-question" (click)="toggleFaq(i)">
+              <h5>{{ item.question }}</h5>
+              <span class="toggle-icon">
+                {{ activeFaqIndex === i ? '-' : '+' }}
+              </span>
+            </div>
+            <div class="faq-answer" *ngIf="activeFaqIndex === i">
+              <p>{{ item.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <div *ngIf="selectedTab === 'logout'">
+        <h4>Logout from All Devices</h4>
+        <button class="btn btn-warning" (click)="logoutFromAllDevices()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

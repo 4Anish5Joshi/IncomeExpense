@@ -11,12 +11,12 @@
         </button>
         <h2 class="mb-0 text-primary" style="margin-top: 5px;">{{ group.name }}</h2>
         <div class="members-list">
-          <h5 class="mb-0 text-muted">
+          <h4 class="mb-0 text-muted">
             Members:
             <span *ngFor="let member of group.members; let last = last">
               {{ member }}<span *ngIf="!last">, </span>
             </span>
-          </h5>
+          </h4>
         </div>
       </div>
     </div>
@@ -36,96 +36,147 @@
     <li class="nav-item">
       <a
         class="nav-link"
-        [ngClass]="{'active-tab': selectedTab === 'insights'}"
-        (click)="selectTab('insights')"
-      >
-        Insights
-      </a>
-    </li>
-    <li class="nav-item">
-      <a
-        class="nav-link"
         [ngClass]="{'active-tab': selectedTab === 'balances'}"
         (click)="selectTab('balances')"
       >
         Balances
       </a>
     </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [ngClass]="{'active-tab': selectedTab === 'insights'}"
+        (click)="selectTab('insights')"
+      >
+        Insights
+        <i class="fas fa-lock" *ngIf="!isSubscribed" style="font-size: 18px; margin-left: 10px;"></i>
+      </a>
+    </li>
   </ul>
 
 
-  <!-- Tabs Content -->
   <div *ngIf="selectedTab === 'expenses'">
-    <!-- Add an Expense Form -->
     <div class="card shadow-lg mb-4">
       <div class="card-body">
         <h4 class="text-primary">Add an Expense</h4>
-        <div class="row mt-3">
+        <form #expenseForm="ngForm" (ngSubmit)="addExpense()" class="row mt-3">
           <!-- Expense Description -->
           <div class="form-group col-lg-4 col-md-6">
-            <label for="expenseDescription">Expense Description:</label>
+            <label for="expenseDescription" class="required">Expense Description:</label>
             <input
               id="expenseDescription"
+              name="description"
               class="form-control"
+              [class.is-invalid]="descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched)"
               placeholder="e.g., Dinner at restaurant"
               [(ngModel)]="expense.description"
+              required
+              minlength="3"
+              #descriptionInput="ngModel"
             />
-          </div>
-          <!-- Total Amount -->
-          <div class="form-group col-lg-2 col-md-6">
-            <label for="expenseAmount">Amount:</label>
-            <input
-              id="expenseAmount"
-              type="number"
-              class="form-control"
-              placeholder="Enter Amount"
-              [(ngModel)]="expense.amount"
-            />
-          </div>
-          <!-- Payer -->
-          <div class="form-group col-lg-3 col-md-6">
-            <label for="payer">Paid By:</label>
-            <ng-select
-              [items]="group.members"
-              [(ngModel)]="expense.payer"
-              placeholder="Paid by whom"
-              [clearable]="true"
-            >
-            </ng-select>
-          </div>
-          <!-- Split With -->
-          <div class="form-group col-lg-3 col-md-6">
-            <label for="participants">Split With:</label>
-            <ng-select
-              [items]="group.members"
-              [(ngModel)]="expense.participants"
-              placeholder="Select Participants"
-              [multiple]="true"
-            >
-            </ng-select>
-            <div class="form-check mt-2">
-              <input
-                type="checkbox"
-                id="selectAll"
-                class="form-check-input"
-                (change)="toggleSelectAll($event)"
-                [checked]="isAllSelected()"
-              />
-              <label for="selectAll" class="form-check-label">Select All</label>
+            <div class="invalid-feedback" *ngIf="descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched)">
+              <div *ngIf="descriptionInput.errors?.['required']">Description is required</div>
+              <div *ngIf="descriptionInput.errors?.['minlength']">Description must be at least 3 characters</div>
             </div>
           </div>
-          <!-- Add Expense Button -->
-          <div class="col-12 text-center mt-3">
-            <button class="btn btn-success px-4" (click)="addExpense()">Add Expense</button>
+
+          <!-- Total Amount -->
+          <div class="form-group col-lg-2 col-md-6">
+            <label for="expenseAmount" class="required">Amount:</label>
+            <input
+              id="expenseAmount"
+              name="amount"
+              type="number"
+              class="form-control"
+              [class.is-invalid]="amountInput.invalid && (amountInput.dirty || amountInput.touched)"
+              placeholder="Enter Amount"
+              [(ngModel)]="expense.amount"
+              required
+              min="0.01"
+              #amountInput="ngModel"
+            />
+            <div class="invalid-feedback" *ngIf="amountInput.invalid && (amountInput.dirty || amountInput.touched)">
+              <div *ngIf="amountInput.errors?.['required']">Amount is required</div>
+              <div *ngIf="amountInput.errors?.['min']">Amount must be greater than 0</div>
+            </div>
           </div>
-        </div>
+
+          <!-- Payer -->
+          <div class="form-group col-lg-3 col-md-6">
+            <label for="payer" class="required">Paid By:</label>
+            <ng-select
+              id="payer"
+              name="payer"
+              [items]="group.members"
+              [(ngModel)]="expense.payer"
+              [class.is-invalid]="payerInput.invalid && (payerInput.dirty || payerInput.touched)"
+              placeholder="Paid by whom"
+              [clearable]="true"
+              required
+              #payerInput="ngModel"
+            >
+            </ng-select>
+            <div class="invalid-feedback" *ngIf="payerInput.invalid && (payerInput.dirty || payerInput.touched)">
+              <div *ngIf="payerInput.errors?.['required']">Payer is required</div>
+            </div>
+          </div>
+
+          <!-- Split With -->
+          <div class="form-group col-lg-3 col-md-6">
+            <label for="participants" class="required">Split With:</label>
+            <ng-select
+              id="participants"
+              name="participants"
+              [items]="splitWithOptions"
+              [(ngModel)]="expense.participants"
+              [class.is-invalid]="participantsInput.invalid && (participantsInput.dirty || participantsInput.touched)"
+              placeholder="Select Participants"
+              [multiple]="true"
+              required
+              (change)="onSplitWithChange()"
+              #participantsInput="ngModel"
+            >
+            </ng-select>
+            <div class="invalid-feedback" *ngIf="participantsInput.invalid && (participantsInput.dirty || participantsInput.touched)">
+              <div *ngIf="participantsInput.errors?.['required']">At least one participant is required</div>
+            </div>
+          </div>
+
+          <!-- Add Expense Button -->
+          <div class="col-4 text-center mt-3">
+            <div  class="addexpense" >
+              <button
+              type="submit"
+              class="btn btn-success px-4"
+              [disabled]="!expenseForm.form.valid"
+            >
+              Add Expense
+            </button>
+            </div>
+
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
     <!-- Expense Summary -->
     <div class="card shadow-lg mb-4">
       <div class="card-body">
-        <h4 class="text-primary">Expense Summary</h4>
+        <div class="row">
+          <div class="col-lg-10">
+            <h4 class="text-primary">Expense Summary</h4>
+          </div>
+          <div class="col-lg-2">
+            <i
+              class="fas fa-file-excel"
+              [ngClass]="{ disabled: !selectedExportMembers.length }"
+              style="color:darkblue; font-size: 24px; cursor: pointer;"
+              (click)="openExportOptions()">
+            </i>
+          </div>
+        </div>
+
         <div *ngIf="group.expenses.length === 0" class="text-center mt-3">
           <p>No expenses added yet!</p>
         </div>
@@ -184,21 +235,27 @@
 
   <div *ngIf="selectedTab === 'insights'">
     <!-- Insights Section -->
-
-    <div class=" container card shadow-lg mb-4">
+    <div class=" container card shadow-lg mb-4" style="margin-bottom: 50px;">
       <div class="card-body">
         <h3 class="text-primary">Insights</h3>
-        <!-- Card for Balance Chart with highlight and box shadow -->
-         <div class="card mt-4 border-primary shadow-lg rounded-lg highlight-card">
-          <!-- <div class="card-body"> -->
+           <div class="col-lg-6  border-primary shadow-lg rounded-lg highlight-card" *ngIf="!isLoading">
             <h3 class="text-center">Balance Overview</h3>
-            <!-- <canvas id="balanceChart"></canvas> -->
-            <div #networkContainer style="height: 500px;"></div>
-
+            <div #networkContainer class="network" ></div>
+           </div>
+           <div class="col-lg-6  border-primary shadow-lg rounded-lg highlight-card" *ngIf="!isLoading">
+            <h3 class="text-center">Contributions and Balance Overview</h3>
+            <canvas id="radarChart"></canvas>
           </div>
+           <div class="col-lg-12 border-primary shadow-lg rounded-lg highlight-card" *ngIf="!isLoading" style="margin-top: 30px;">
+            <h3 class="text-center">Expenses and Balances Trends</h3>
+            <canvas id="stackedLineBarChart"></canvas>
+          </div>
+          <!-- <div class="col-lg-6  border-primary shadow-lg rounded-lg highlight-card" *ngIf="!isLoading">
+            <h3 class="text-center">Amount and Expense Overview</h3>
+            <canvas id="waterfallChart"></canvas>
+          </div> -->
         </div>
       </div>
-    <!-- </div> -->
   </div>
 
   <div *ngIf="selectedTab === 'balances'">
@@ -206,29 +263,175 @@
     <div class="card shadow-lg mb-4">
       <div class="card-body">
         <h4 class="text-primary">Balances</h4>
+
+        <!-- Simplify Debts -->
+        <div class="alert alert-info">
+          <h5>Simplified Debts:</h5>
+          <ul>
+            <li *ngFor="let debt of simplifiedDebts">
+              <strong>{{ debt.from }}</strong> owes
+              <strong>{{ debt.to }}</strong> ₹{{ debt.amount | number:'1.2-2' }}
+            </li>
+          </ul>
+          <p *ngIf="simplifiedDebts.length === 0" class="text-muted">No debts to simplify!</p>
+        </div>
+
+        <!-- Total Expense -->
+        <div class="alert alert-success">
+          <h5>Total Group Expenses:</h5>
+          <p>₹{{ getTotalExpenses() | number:'1.2-2' }}</p>
+        </div>
+
+        <!-- Balances -->
         <div *ngIf="getBalanceKeys().length === 0" class="text-center mt-3">
           <p>All balances are settled!</p>
         </div>
+
         <ul class="list-group" *ngIf="getBalanceKeys().length > 0">
-          <li class="list-group-item" *ngFor="let key of getBalanceKeys()">
-            <span *ngIf="balances[key] > 0">
-              {{ key }} owes ₹{{ balances[key] | number:'1.2-2' }}
-            </span>
-            <span *ngIf="balances[key] < 0">
-              {{ key }} is owed ₹{{ -balances[key] | number:'1.2-2' }}
-            </span>
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let key of getBalanceKeys()">
+            <div class="row">
+              <div class="col-lg-10">
+                <div>
+                  <span *ngIf="balances[key] > 0">
+                    {{ key }} owes ₹{{ balances[key] | number:'1.2-2' }}
+                  </span>
+                  <span *ngIf="balances[key] < 0">
+                    {{ key }} is owed ₹{{ -balances[key] | number:'1.2-2' }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <button class="btn btn-warning btn-sm ms-2" (click)="remind(key)" *ngIf="balances[key] > 0">Remind</button>
+                <button class="btn btn-success btn-sm ms-2" (click)="settleBalance(key)" *ngIf="balances[key] !== 0">Settle</button>
+              </div>
+            </div>
           </li>
         </ul>
+
         <div class="text-center mt-3">
-          <button class="btn btn-primary" (click)="settleUp()">Settle Up</button>
+          <button class="btn btn-primary" (click)="settleUp()">Settle Group</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Export Options Modal -->
+<div class="modal" tabindex="-1" *ngIf="showExportModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="col-lg-10">
+          <h3 class="modal-title">Export Options</h3>
+        </div>
+       <div class="col-lg-2">
+        <button type="button" class="btn-close" (click)="closeExportModal()">&times;</button>
+       </div>
+      </div>
+      <div class="modal-body">
+        <h4 *ngIf="selectedExportMembers.length" class="text-primary">
+          Previewing data for: {{ selectedExportMembers.join(', ') }}
+        </h4>
+        <p *ngIf="!selectedExportMembers.length" class="text-danger">
+          Please select at least one member to export.
+        </p>
+        <label for="exportMember" class="form-label">Export for:</label>
+        <ng-select
+          [items]="exportMembers"
+          [(ngModel)]="selectedExportMembers"
+          placeholder="Select a member"
+          [clearable]="true"
+          [multiple]="true"
+          (change)="getFilteredExpenses()"
+        >
+        </ng-select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeExportModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="exportToExcel()">Export</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Subscription Modal -->
+<div class="modal" tabindex="-1" *ngIf="showSubscribeModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white popup-header">
+        <h3 class="modal-title">
+          <i class="fas fa-chart-line me-2"></i> Unlock Premium Insights
+        </h3>
+        <button type="button" style="color: black;" (click)="closeSubscriptionModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-4">
+          <h4>Choose Your Plan</h4>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="card text-center shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Monthly</h5>
+                <h3 class="text-primary">₹99</h3>
+                <p class="text-muted">Billed Monthly</p>
+                <button class="btn btn-outline-primary w-100" (click)="openPaymentModal('monthly')">Choose Monthly</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="card text-center shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Yearly</h5>
+                <h3 class="text-success">₹999</h3>
+                <p class="text-muted">Billed Annually</p>
+                <button class="btn btn-success w-100" (click)="openPaymentModal('yearly')">Choose Yearly</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h6>Premium Features Include:</h6>
+          <ul>
+            <li><i class="fas fa-check text-success"></i> Advanced analytics</li>
+            <li><i class="fas fa-check text-success"></i> Visual expense tracking</li>
+            <li><i class="fas fa-check text-success"></i> Export reports</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container text-center mt-5" *ngIf="!group">
-  <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
+<!-- Payment Modal -->
+<div class="modal" tabindex="-1" *ngIf="showPaymentModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white popup-header">
+        <h5 class="modal-title">
+          <i class="fas fa-wallet me-2"></i> Complete Your Payment
+        </h5>
+        <button type="button" style="color: black;" (click)="closePaymentModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-3">
+          <p>Selected Plan: <strong>{{ selectedPlan | titlecase }}</strong></p>
+          <p>Total: <strong>₹{{ selectedPlan === 'monthly' ? 99 : 999 }}</strong></p>
+        </div>
+        <div class="list-group">
+          <button class="list-group-item list-group-item-action" (click)="completePayment('UPI')">
+            <i class="fas fa-mobile-alt me-2"></i> UPI
+          </button>
+          <button class="list-group-item list-group-item-action" (click)="completePayment('Credit/Debit Card')">
+            <i class="fas fa-credit-card me-2"></i> Credit/Debit Card
+          </button>
+          <button class="list-group-item list-group-item-action" (click)="completePayment('Net Banking')">
+            <i class="fas fa-university me-2"></i> Net Banking
+          </button>
+          <button class="list-group-item list-group-item-action" (click)="completePayment('Wallets')">
+            <i class="fas fa-wallet me-2"></i> Wallets
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

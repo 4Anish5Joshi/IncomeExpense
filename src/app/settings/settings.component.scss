@@ -1,0 +1,35 @@
+.faq {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.faq-answer {
+  padding: 10px 15px;
+  background-color: #f7f7f7;
+  border-top: 1px solid #ddd;
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+}

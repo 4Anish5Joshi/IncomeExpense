@@ -5,6 +5,7 @@ import { VisualizationComponent } from './visualization/visualization.component'
 import { LoginComponent } from './login/login.component';
 import { SplitComponent } from './split/split.component';
 import { GroupDetailsComponent } from './group-details/group-details.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'analytics', component: VisualizationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'groups/:name', component: GroupDetailsComponent },
+  { path: 'settings', component: SettingsComponent },
 ];
 
 @NgModule({

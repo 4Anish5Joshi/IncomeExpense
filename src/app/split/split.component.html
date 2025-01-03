@@ -88,9 +88,9 @@
 
 
   <!-- Display Groups as Cards (Full Width) -->
-  <div *ngIf="groups.length > 0" class="row mt-4">
+  <div *ngIf="groups.length > 0" class="row mt-4" >
 
-    <div class="col-lg-6" *ngFor="let group of groups">
+    <div class="col-lg-6" *ngFor="let group of groups" style="padding: 3px;">
       <!-- Group Header -->
       <div class="card shadow" (click)="viewGroupDetails(group)" style="cursor: pointer;">
         <div class="card-body">

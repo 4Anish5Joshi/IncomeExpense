@@ -24,8 +24,9 @@ import { LoginComponent } from './login/login.component';
 import { SplitComponent } from './split/split.component';
 import { BotComponent } from './bot/bot.component';
 import { GroupDetailsComponent } from './group-details/group-details.component';
+import { SettingsComponent } from './settings/settings.component';
 @NgModule({
-  declarations: [AppComponent, HighlightDirective, MonthFilterPipe, InputRestrictDirective, TrackerComponent, HeaderComponent, VisualizationComponent, SavingModalComponent, LoginComponent, SplitComponent, BotComponent, GroupDetailsComponent],
+  declarations: [AppComponent, HighlightDirective, MonthFilterPipe, InputRestrictDirective, TrackerComponent, HeaderComponent, VisualizationComponent, SavingModalComponent, LoginComponent, SplitComponent, BotComponent, GroupDetailsComponent, SettingsComponent],
   imports: [NgbModule,NgSelectModule,BrowserAnimationsModule,MatToolbarModule,MatIconModule, MatDialogModule,BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, NoopAnimationsModule, ServiceWorkerModule.register('ngsw-worker.js', {
   enabled: environment.production,
   // Register the ServiceWorker as soon as the application is stable
