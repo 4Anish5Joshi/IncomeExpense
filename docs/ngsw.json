@@ -1,0 +1,105 @@
+{
+  "configVersion": 1,
+  "timestamp": 1742153472676,
+  "index": "/IncomeExpense/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/IncomeExpense/favicon.ico",
+        "/IncomeExpense/firebase-messaging-sw.js",
+        "/IncomeExpense/index.html",
+        "/IncomeExpense/main.75c15c30f98b1bb1.js",
+        "/IncomeExpense/manifest.webmanifest",
+        "/IncomeExpense/polyfills.82cf4d944d698269.js",
+        "/IncomeExpense/runtime.9acb55503d01df10.js",
+        "/IncomeExpense/styles.e36b6948f76e4458.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/IncomeExpense/assets/Logo.png",
+        "/IncomeExpense/assets/batman.png",
+        "/IncomeExpense/assets/bot.png",
+        "/IncomeExpense/assets/diwali.png",
+        "/IncomeExpense/assets/exp.png",
+        "/IncomeExpense/assets/icons/icon-128x128.png",
+        "/IncomeExpense/assets/icons/icon-144x144.png",
+        "/IncomeExpense/assets/icons/icon-152x152.png",
+        "/IncomeExpense/assets/icons/icon-192x192.png",
+        "/IncomeExpense/assets/icons/icon-384x384.png",
+        "/IncomeExpense/assets/icons/icon-512x512.png",
+        "/IncomeExpense/assets/icons/icon-72x72.png",
+        "/IncomeExpense/assets/icons/icon-96x96.png",
+        "/IncomeExpense/assets/inc.svg",
+        "/IncomeExpense/assets/log.svg",
+        "/IncomeExpense/assets/register.svg",
+        "/IncomeExpense/assets/spending.png",
+        "/IncomeExpense/assets/superman.png",
+        "/IncomeExpense/assets/ud.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/IncomeExpense/assets/Logo.png": "bbd8b6bf317d8a3fac80e3f64b96e47b9330ea36",
+    "/IncomeExpense/assets/batman.png": "b24fa3fb7632419fb04fc21fa381b804d41ac0cf",
+    "/IncomeExpense/assets/bot.png": "2e406b3be1f5903ca21f29b9f6b9f7d5ca002db0",
+    "/IncomeExpense/assets/diwali.png": "ef9bc1d1cec37dd441a8d2c6496a2b469eabbcd6",
+    "/IncomeExpense/assets/exp.png": "1b8fb1747de997dc8699466d3024bc00ef3e88ef",
+    "/IncomeExpense/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/IncomeExpense/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/IncomeExpense/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/IncomeExpense/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/IncomeExpense/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/IncomeExpense/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/IncomeExpense/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/IncomeExpense/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/IncomeExpense/assets/inc.svg": "4fc86bb4392938e453bffc9ffb0ec212cace7384",
+    "/IncomeExpense/assets/log.svg": "05cceb29e83e4ab62c29f0585ff623de3e417245",
+    "/IncomeExpense/assets/register.svg": "603086b071653c35a3a021b94e2928cb7992eeab",
+    "/IncomeExpense/assets/spending.png": "c7127139e06830258a7e2a462d7000abbf72570e",
+    "/IncomeExpense/assets/superman.png": "6bb719bd054b040a6d06a877b00ba512b1251830",
+    "/IncomeExpense/assets/ud.png": "ad55895f9cf51a0eb0b715367b600cbde36cdbe1",
+    "/IncomeExpense/favicon.ico": "1b8fb1747de997dc8699466d3024bc00ef3e88ef",
+    "/IncomeExpense/firebase-messaging-sw.js": "6acf0619a72bc0fc4ebc2e002a9dde2c3001e325",
+    "/IncomeExpense/index.html": "6e8d7b965360c9e2eac9507419b1922925bdd913",
+    "/IncomeExpense/main.75c15c30f98b1bb1.js": "e94889cadf270e57140cdd9da6abf4c049fe5012",
+    "/IncomeExpense/manifest.webmanifest": "aaa9f56c27354cd58fba03a03584b43d95a85a0b",
+    "/IncomeExpense/polyfills.82cf4d944d698269.js": "2d2e59a4b43682dcfbf32173509385527584a9a0",
+    "/IncomeExpense/runtime.9acb55503d01df10.js": "e31a35e514a1168780996761f30c66b33eb4ee46",
+    "/IncomeExpense/styles.e36b6948f76e4458.css": "42df089c8b1a76193608ff8bfa0aa67a1391580a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
