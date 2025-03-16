@@ -4,7 +4,8 @@ import { SharedService } from '../shared.service';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { GlobalWorkerOptions, pdfjsLib, version, getDocument } from 'pdfjs-dist';
-
+import { IncexpService } from "src/app/service/incexp.service";
+import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-tracker',
   templateUrl: './tracker.component.html',
@@ -71,8 +72,8 @@ categories = [
   { value: 'Office', label: 'Office', icon: 'fas fa-building' }
 ];
 selectedCategory: any;
-
-  constructor(private sharedService: SharedService) {
+  jwtToken: string | null = localStorage.getItem('jwtToken');
+  constructor(private sharedService: SharedService, private incexpService: IncexpService) {
     this.loadTransactions();
     this.calculateTotals();
     this.isUserLoggedIn = !!localStorage.getItem('trackerotplogin');
@@ -81,7 +82,7 @@ selectedCategory: any;
   }
 
   ngOnInit(): void {
-
+      this.loadTransaction();
   }
 
   currentPage: number = 1; // Current page
@@ -192,7 +193,26 @@ selectedCategory: any;
     this.selectedCategory = null;
   }
 
+  loadTransaction(): void {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.jwtToken}`,  
+      'Content-Type': 'application/json'
+    });
+  
+    this.incexpService.getTransactions(headers).subscribe({
+      next: (data) => {
+        this.transactions = data;
+        console.log('Transactions:', data);
+      },
+      error: (error) => {
+        console.error('Error fetching transactions:', error);
+      }
+    });
+  }
+  
 
+ 
+  
   loadTransactions() {
     const storedTransactions = localStorage.getItem('transactions');
     const storedYear = localStorage.getItem('filterYear');

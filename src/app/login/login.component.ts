@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IncexpService } from '../service/incexp.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements AfterViewInit {
 
-  phoneNumber: string = '';
+  phoneNumber: string = '9820680494';
   otpSent: boolean = false;
   generatedOTP: string = '';
   enteredOTP: string = '';
@@ -21,7 +22,7 @@ export class LoginComponent implements AfterViewInit {
   @ViewChild('login', { static: false }) loginBtn!: ElementRef;
   @ViewChild('container', { static: false }) container!: ElementRef;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private incexpService: IncexpService) {}
 
   ngAfterViewInit(): void {
     if (this.registerBtn && this.loginBtn && this.container) {
@@ -89,8 +90,22 @@ export class LoginComponent implements AfterViewInit {
     this.enteredOTP = ''; // Clear the entered OTP
   }
 
-  guestLogin(){
-    localStorage.removeItem('trackerotplogin');
-    this.router.navigate(['/home']);
+  // guestLogin(){
+  //   localStorage.removeItem('trackerotplogin');
+  //   this.router.navigate(['/home']);
+  // }
+
+  guestLogin(): void {
+    this.incexpService.guestLogin(this.phoneNumber).subscribe({
+      next: (response) => {
+        console.log('Login successful:', response);
+        localStorage.setItem('jwtToken', response.token); // ✅ Store token
+        this.router.navigate(['/home']); // ✅ Redirect after login
+      },
+      error: (error) => {
+        console.error('Login failed:', error);
+      }
+    });
   }
+  
 }
